@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta HTTP-EQUIV="pragma" CONTENT="no-cache">
+    <title>UniverseForum</title>
+    <link rel="icon" type="image/x-icon" href="/image/favicon.ico">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/contentTemplate.css">
+</head>
+<body>
+<div class="navigation_bar">
+    <ul>
+        <li>
+            <div th:if="${session.isLogin}"></div>
+        </li>
+        <li>
+            <div th:unless="${session.isLogin}" class="a_btn" onclick="window.location='/a/register'">注册</div>
+        </li>
+        <li>
+            <div th:if="${session.isLogin}" class="a_btn" onclick="window.location='/a/logout'">注销</div>
+            <div th:if="${session.isLogin}" class="a_btn" onclick="window.location='/a/home'" th:text="${session.username}"></div>
+        </li>
+        <li>
+            <div th:unless="${session.isLogin}" class="a_btn" onclick="window.location='/a/login'">登录</div>
+        </li>
+        <li>
+            <div class="a_btn" onclick="window.location='/index'">首页</div>
+        </li>
+    </ul>
+    <div class="a_btn" id="slogan">
+        <span th:if="${session.isLogin}" th:text="${session.userSign+' Level:'+session.userLv+'  🔋 '+session.userExp+'%'}"></span>
+        <span th:unless="${session.isLogin}">LONG MAY THE SUNSHINE Level : 0 🔋 100%</span>
+    </div>
+</div>
+<div class="content">
+    <div class="search">
+        <form name="search_form" action="/s/bbs" method="get">
+            <input type="text" required="required" name="s_bbs" autocomplete="off"/>
+            <button type="submit">进入版块</button>
+        </form>
+    </div>
+</div>
+<script th:inline="javascript" type="text/javascript">
+    var msg = getCookie("warningMsg");
+    if (msg != null) {
+        alert(decodeURIComponent(msg));
+        delCookie("warningMsg");
+    }
+</script>
+</body>
+</html>

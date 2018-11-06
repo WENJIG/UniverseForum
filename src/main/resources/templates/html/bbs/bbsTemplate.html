@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${bbsJson.bbsName}"></title>
+    <link rel="icon" type="image/x-icon" href="/image/favicon.ico">
+    <link rel="stylesheet" href="/css/contentTemplate.css">
+    <link rel="stylesheet" href="/css/bbsTemplate.css">
+</head>
+<body>
+<div class="navigation_bar">
+    <ul>
+        <li>
+            <div th:if="${session.isLogin}"></div>
+        </li>
+        <li>
+            <div th:unless="${session.isLogin}" class="a_btn" onclick="window.location='/a/register'">注册</div>
+        </li>
+        <li>
+            <div th:if="${session.isLogin}" class="a_btn" onclick="window.location='/a/logout'">注销</div>
+            <div th:if="${session.isLogin}" class="a_btn" onclick="window.location='/a/home'"
+                 th:text="${session.username}"></div>
+        </li>
+        <li>
+            <div th:unless="${session.isLogin}" class="a_btn" onclick="window.location='/a/login'">登录</div>
+        </li>
+        <li>
+            <div class="a_btn" onclick="window.location='/index'">首页</div>
+        </li>
+    </ul>
+    <div class="a_btn" id="slogan">
+        <span th:if="${session.isLogin}"
+              th:text="${session.userSign+' Level:'+session.userLv+'  🔋 '+session.userExp+'%'}"></span>
+        <span th:unless="${session.isLogin}">LONG MAY THE SUNSHINE Level : 0 🔋 100%</span>
+    </div>
+</div>
+<div class="content">
+    <div class="bbs_head" id="bbsheadtag">
+        <div id="bbs_icon" th:style="'background: url(/image/bbsIcon/'+${bbsJson.bbsIcon}+') ; background-size: 100%;'">
+
+        </div>
+        <div id="bbs_name">
+            <h1 th:text="${bbsJson.bbsName}"></h1>
+        </div>
+        <div id="bbs_sign">
+            <p th:text="${bbsJson.bbsSign}"></p>
+        </div>
+        <div id="bbs_msg">
+            <p th:text="${'关注人数：' + bbsJson.bbsFocusNum}"></p>
+            <p th:text="${'主题帖数量：' + bbsJson.bbsTopicNum}"></p>
+        </div>
+        <!--
+        <div id="bbs_btn">
+            <button type="button">关注此版块</button>
+        </div>
+        -->
+    </div>
+    <br/><br/>
+    <br/><br/>
+    <div class="bbs_content" th:each="topic : ${topicList}">
+        <div class="post_topic">
+            <div class="post_user">
+                <div class="post_user_head_img"
+                     th:style="'background: url(/image/headImg/'+${userHeadImg['__${topic.postUserName}__']}+') ; background-size: 100%;'">
+                </div>
+                <div class="post_user_name">
+                    <span>发帖人：</span>
+                    <span th:text="${topic.postUserName}"></span>
+                    <br/><br/>
+                </div>
+                <div class="post_date">
+                    <span>发帖时间：</span>
+                    <span th:text="${topic.releaseDate}"></span>
+                </div>
+            </div>
+            <div class="topic_content">
+                <div class="topic_ti" onclick="window.location='/index'">
+                    <a th:href="${'/p/' + topic.topicId}">
+                        <span th:text="${topic.topicTitle}"></span>
+                    </a>
+                </div>
+                <div class="topic_context">
+                    <span th:text="${topic.topicContext}"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post_topic_domain" id="postdomain">
+        <p>————————————————底线就是拿来被超过的————————————————</p>
+        <form method="post" action="/n/postTopic">
+            <input type="text" required="required" name="tit" autocomplete="off" placeholder="请在此输入你的标题(最多不超过25字符)"/>
+            <textarea name="text" maxlength="9999" placeholder="请在此输入你的内容(最多不超过9999字符)" autocomplete="off"></textarea>
+            <input name="bbsName" style="display: none" MAXLENGTH="25" th:value="${bbsJson.bbsName}"/>
+            <button type="submit">发帖</button>
+        </form>
+    </div>
+</div>
+<div class="helpMenu">
+    <div class="post_new_topic">
+        <a href="#postdomain">发帖</a>
+    </div>
+    <div class="reTop">
+        <a href="#bbsheadtag">↑</a>
+    </div>
+</div>
+<script th:inline="javascript" type="text/javascript">
+    var msg = getCookie("warningMsg");
+    if (msg != null) {
+        alert(decodeURIComponent(msg));
+        delCookie("warningMsg");
+    }
+</script>
+</body>
+</html>

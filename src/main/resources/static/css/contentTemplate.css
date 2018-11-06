@@ -1,0 +1,94 @@
+body {
+    background: white;
+
+    /*
+    background-image: url(/image/menu/main2.jpg);
+    */
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+.navigation_bar {
+    width: 1800px;
+    height: 30px;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    margin-left: -900px;
+    margin-right: auto;
+    border-radius: 3px;
+    border: 1px solid #fff;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 4;
+}
+
+.navigation_bar a {
+    width: 50px;
+    height: 30px;
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    color: #EEEEEE;
+}
+
+.a_btn {
+    background: #666;
+    color: white;
+    overflow: hidden;
+    z-index: 3;
+    float: right;
+    font-weight: 400;
+    line-height: 30px;
+    margin-right: 0em;
+    cursor: pointer;
+    overflow: hidden;
+    padding: 0 40px;
+    position: relative;
+    text-align: center;
+    width: auto;
+}
+
+.a_btn:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 500%;
+    height: 1000%;
+    background: #838383;
+    z-index: -1;
+    transform-origin: 0% 0%;
+    transform: translateX(calc(20% - 25px)) translateY(10%) rotate(-45deg);
+/ transform: translateY(10 %) translateX(16 %) rotate(- 45 deg);
+    transition: transform .3s;
+}
+
+.a_btn:hover::after {
+    transform: translateY(10%) translateX(-25px) rotate(-45deg);
+}
+
+/* 标语浮动 */
+
+#slogan {
+    float: left;
+}
+
+.content {
+    width: 900px;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 3px;
+    border: 1px solid #fff;
+    position: relative;
+    top: 36px;
+    z-index: 1;
+}

@@ -1,0 +1,247 @@
+
+a {
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: white;
+    display: block;
+}
+
+a:hover {
+    color: #0096e6;
+    background: white;
+    border: 1px solid black;
+}
+
+.bbs_head {
+    width: 900px;
+    height: 300px;
+    top: 0;
+    position: relative;
+}
+
+#bbs_icon {
+    width: 300px;
+    height: 300px;
+    float: left;
+}
+
+#bbs_name {
+    width: 600px;
+    height: auto;
+    text-align: center;
+    color: black;
+    font-family: "Microsoft YaHei UI Light", "Microsoft Yahei", "Consolas";
+    margin-left: 300px;
+}
+
+#bbs_msg {
+    width: 600px;
+    height: auto;
+    text-align: center;
+    color: black;
+    font-family: "Microsoft YaHei UI Light", "Microsoft Yahei", "Consolas";
+    margin-left: 300px;
+    font-size: 18px;
+}
+
+#bbs_sign {
+    width: 600px;
+    height: auto;
+    text-align: center;
+    color: black;
+    font-family: "Microsoft YaHei UI Light", "Microsoft Yahei", "Consolas";
+    margin-left: 300px;
+    font-size: 18px;
+}
+
+#bbs_btn {
+    width: 200px;
+    height: 30px;
+    position: relative;
+    float: right;
+}
+
+#bbs_btn button {
+    height: 200px;
+    height: 30px;
+    text-align: center;
+    color: white;
+    background: #696969;
+}
+
+#bbs_btn button:hover {
+    background: #A9A9A9;
+}
+
+/* 主题帖区域 */
+
+.post_topic {
+    width: 900px;
+    height: 298px;
+    border-radius: 1px;
+    border: 1px solid #fff;
+}
+
+.post_user {
+    width: 150px;
+    height: 298px;
+    border-radius: 1px;
+    border: 1px solid #fff;
+    float: left;
+}
+
+.post_user_head_img {
+    width: 150px;
+    height: 148px;
+    float: top;
+    border-radius: 1px;
+    border: 1px solid #fff;
+}
+
+.topic_content {
+    width: 750px;
+    height: 300px;
+    margin-left: 150px;
+}
+
+.topic_ti {
+    width: 750px;
+    height: 28px;
+    color: #EEEEEE;
+    background: #696969;
+    line-height: 30px;
+    text-align: center;
+    position: relative;
+    border-radius: 1px;
+    border: 1px solid #fff;
+    cursor: pointer;
+}
+
+.topic_ti:hover {
+    background: #EEEEEE;
+    color: black;
+}
+
+.topic_context {
+    float: top;
+    width: 720px;
+    height: 250px;
+    padding: 10px;
+    line-height: 20px;
+    font-family: "Microsoft YaHei UI Light", "Microsoft Yahei", "Consolas";
+    font-size: 20px;
+    overflow-x: hidden;
+    text-overflow:ellipsis;
+    word-break: keep-all;
+}
+
+/* 侧悬浮帮助栏 */
+.helpMenu {
+    width: 50px;
+    height: 300px;
+    background: #696969;
+    left: 400px;
+    top: 50px;
+    position: fixed;
+    z-index: 5;
+}
+
+.post_new_topic {
+    width: 48px;
+    height: 48px;
+    float: top;
+    cursor: pointer;
+    border-radius: 1px;
+    border: 1px solid #fff;
+    background: #696969;
+    color: #EEEEEE;
+    line-height: 48px;
+    text-align: center;
+}
+
+.reTop {
+    width: 48px;
+    height: 48px;
+    float: top;
+    cursor: pointer;
+    border-radius: 1px;
+    border: 1px solid #fff;
+    background: #696969;
+    color: #EEEEEE;
+    line-height: 48px;
+    text-align: center;
+}
+
+/* 发帖领域 */
+.post_topic_domain {
+    width: 898px;
+    height: 540px;
+}
+
+.post_topic_domain input {
+    width: 898px;
+    height: 40px;
+    line-height: 40px;
+    font-family: "Microsoft YaHei UI Light", "Microsoft Yahei", "Consolas";
+    color: black;
+    border-radius: 1px;
+    border: 1px solid white;
+    font-size: 18px;
+}
+
+.post_topic_domain input:focus {
+    color: black;
+    border: 1px solid #0096e6;
+}
+
+input::-webkit-input-placeholder {
+    color: black;
+    text-align: left;
+    font-family: "Microsoft YaHei UI Light", "Microsoft Yahei", "Consolas";
+    font-size: 18px;
+}
+
+textarea::-webkit-input-placeholder {
+    color: black;
+    text-align: left;
+    font-family: "Microsoft YaHei UI Light", "Microsoft Yahei", "Consolas";
+    font-size: 18px;
+}
+
+.post_topic_domain p {
+    text-align: center;
+    font-family: "Microsoft YaHei UI Light", "Microsoft Yahei", "Consolas";
+    color: #696969;
+}
+
+.post_topic_domain textarea {
+    width: 896px;
+    height: 398px;
+    border-radius: 1px;
+    border: 1px solid white;
+    float: bottom;
+    resize: none;
+    font-family: "Microsoft YaHei UI Light", "Microsoft Yahei", "Consolas";
+    font-size: 18px;
+}
+
+.post_topic_domain textarea:focus {
+    border: 1px solid #0096e6;
+    color: black;
+}
+
+.post_topic_domain button {
+    width: 200px;
+    height: 30px;
+    color: #EEEEEE;
+    background: #696969;
+    float: right;
+    bottom: 0;
+    line-height: 30px;
+}
+
+.post_topic_domain button:hover {
+    background: #EEEEEE;
+    color: black;
+}

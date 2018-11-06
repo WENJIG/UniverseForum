@@ -1,0 +1,250 @@
+.basic_information {
+    width: 200px;
+    height: 1000px;
+    float: left;
+    border-radius: 3px;
+    border: 1px solid #fff;
+    position: relative;
+}
+
+.head_image {
+    width: 200px;
+    height: 200px;
+    float: left;
+    border-radius: 3px;
+    border: 1px solid #fff;
+    position: relative;
+}
+
+.user_msg {
+    width: 100%;
+    height: 90px;
+}
+
+.user_msg span {
+    width: 100%;
+    height: 30px;
+    float: left;
+    display: block;
+    text-align: center;
+    line-height: 30px;
+}
+
+/* 按钮 */
+
+.basic_information button {
+    width: 200px;
+    height: 40px;
+    background: #696969;
+    color: #FFFFFF;
+    position: absolute;
+    float: left;
+}
+
+.mb2 {
+    width: 100%;
+    float: left;
+    height: 40px;
+}
+
+.mb2 button {
+    width: 100%;
+    height: 40px;
+    color: #EEEEEE;
+    background: #696969;
+    float: left;
+    position: absolute;
+    font-style: normal;
+    overflow: hidden;
+}
+
+.btn span {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: block;
+    opacity: 1;
+    left: 0;
+    top: 0;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    text-align: center;
+    line-height: 40px;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    -webkit-transition: all 0.2s cubic-bezier(0.05, 0.06, 0.05, 0.95);
+    transition: all 0.2s cubic-bezier(0.05, 0.06, 0.05, 0.95);
+    box-shadow: none;
+    color: #EEEEEE;
+}
+
+.btn span:first-of-type {
+    z-index: 99999;
+}
+
+.btn span:last-of-type {
+    background: #A9A9A9;
+    left: -100%;
+}
+
+.btn:hover span {
+    left: 0;
+}
+
+/* menu */
+
+#menu {
+    width: 700px;
+    height: 1000px;
+    position: relative;
+    left: 200px;
+}
+
+/* head */
+#head {
+    width: 700px;
+    height: 800px;
+    top: 200px;
+    position: relative;
+}
+
+#head button {
+    width: 100px;
+    height: 30px;
+    color: #EEEEEE;
+    background: #696969;
+}
+
+#head button:hover {
+    background: #A9A9A9;
+}
+
+/* sign */
+
+#sign {
+    width: 700px;
+    height: 800px;
+    top: 200px;
+    position: relative;
+}
+
+#sign textarea {
+    width: 300px;
+    height: 120px;
+    resize: none;
+    font-family: "Microsoft YaHei UI Light", "Microsoft Yahei", "Consolas";
+    background: #696969;
+    color: #EEEEEE;
+    font-size: 18px;
+}
+
+#sign button {
+    width: 100px;
+    height: 30px;
+    color: #EEEEEE;
+    background: #696969;
+}
+
+#sign button:hover {
+    background: #A9A9A9;
+}
+
+/* sex */
+
+#sex {
+    width: 700px;
+    height: 800px;
+    top: 200px;
+    position: relative;
+}
+
+#sex button {
+    width: 100px;
+    height: 30px;
+    color: #EEEEEE;
+    background: #696969;
+}
+
+#sex button:hover {
+    background: #A9A9A9;
+}
+
+.radio {
+    display: inline-block;
+    position: relative;
+    line-height: 18px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.radio input {
+    display: none;
+}
+
+.radio .radio-bg {
+    display: inline-block;
+    height: 18px;
+    width: 18px;
+    margin-right: 5px;
+    padding: 0;
+    background-color: #696969;
+    border-radius: 100%;
+    vertical-align: top;
+    box-shadow: 0 1px 15px rgba(0, 0, 0, 0.1) inset, 0 1px 4px rgba(0, 0, 0, 0.1) inset, 1px -1px 2px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.radio .radio-on {
+    display: none;
+}
+
+.radio input:checked + span.radio-on {
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    border-radius: 100%;
+    background: #ffffff;
+    top: 4px;
+    left: 4px;
+    box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.3), 0 0 1px rgba(255, 255, 255, 0.4) inset;
+    background-image: linear-gradient(#ffffff 0, #e7e7e7 100%);
+    transform: scale(0, 0);
+    transition: all 0.2s ease;
+    transform: scale(1, 1);
+    display: inline-block;
+}
+
+#bbs {
+
+}
+
+#att {
+
+}
+
+#fans {
+
+}
+
+#collect {
+
+}
+
+#topic {
+
+}
+
+#reply {
+
+}
+
+#privacy {
+
+}
+
+#safety {
+
+}

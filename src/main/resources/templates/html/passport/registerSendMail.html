@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>已经发送邮件</title>
+    <link rel="icon" type="image/x-icon" href="/image/favicon.ico">
+    <link rel="stylesheet" href="/css/contentTemplate.css">
+    <link rel="stylesheet" href="/css/msgTemplate.css">
+</head>
+<body>
+<div class="content">
+    <table cellspacing="0" cellpadding="0">
+        <tr>
+            <td>
+                <table cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td>
+                            <h3>发送成功</h3>
+                            <h3>提醒 : 邮件有效期为 5 分钟</h3>
+                            <p>系统已经向您注册的 <span th:text="${session.sendEmail}"></span> 邮箱发送了一封注册邮件。</p>
+                            <p>请点击邮件内的链接完成注册的最后一步吧。</p>
+                            <p>
+                                <a href="javascript:history.back()">[ 点击这里返回上一页 ]</a>
+                            </p>
+                            <p>
+                                <a href="/index">[ 点击这里返回首页 ]</a>
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

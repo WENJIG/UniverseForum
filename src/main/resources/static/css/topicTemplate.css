@@ -1,0 +1,158 @@
+a {
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: #EEEEEE;
+    display: block;
+}
+
+a:hover {
+    color: black;
+    background: #EEEEEE;
+    border: 1px solid #0096e6;
+}
+
+/* 楼层 */
+.floors {
+    height: auto;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    overflow: hidden;
+}
+
+.floor_1base {
+    width: 899px;
+    height: auto;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    overflow: hidden;
+}
+
+.floor_info {
+    width: 898px;
+    height: 40px;
+    line-height: 40px;
+    color: black;
+}
+
+.floor_info:hover {
+    color: #0096e6;
+}
+
+.user_head_img {
+    width: 100px;
+    height: 100px;
+    left: 0;
+    top: 45px;
+    float: left;
+}
+
+.user_base_info {
+    width: 797px;
+    height: 100px;
+    margin-left: 100px;
+    font-family: "Microsoft YaHei UI Light", "Microsoft Yahei", "Consolas";
+    line-height: 39px;
+    text-align: center;
+}
+
+.topic_context_template {
+    width: 720px;
+    height: auto;
+    margin-left: 105px;
+    line-height: 30px;
+    font-family: "Microsoft YaHei UI Light", "Microsoft Yahei", "Consolas";
+    font-size: 28px;
+    white-space: pre-wrap;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+/* 侧悬浮帮助栏 */
+.helpMenu {
+    width: 50px;
+    height: 300px;
+    background: #696969;
+    left: 20%;
+    top: 10%;
+    position: fixed;
+    z-index: 5;
+}
+
+.post_new_topic {
+    width: 48px;
+    height: 48px;
+    float: top;
+    cursor: pointer;
+    border-radius: 1px;
+    border: 1px solid #fff;
+    background: #696969;
+    color: #EEEEEE;
+    line-height: 48px;
+    text-align: center;
+}
+
+.reTop {
+    width: 48px;
+    height: 48px;
+    float: top;
+    cursor: pointer;
+    border-radius: 1px;
+    border: 1px solid #fff;
+    background: #696969;
+    color: #EEEEEE;
+    line-height: 48px;
+    text-align: center;
+}
+
+/* 回复领域 */
+
+.floor_post {
+    width: 898px;
+    height: 540px;
+}
+
+textarea::-webkit-input-placeholder {
+    color: black;
+    text-align: left;
+    font-family: "Microsoft YaHei UI Light", "Microsoft Yahei", "Consolas";
+    font-size: 18px;
+}
+
+.floor_post p {
+    text-align: center;
+    font-family: "Microsoft YaHei UI Light", "Microsoft Yahei", "Consolas";
+    color: #696969;
+}
+
+.floor_post textarea {
+    width: 896px;
+    height: 398px;
+    border-radius: 1px;
+    border: 1px solid #fff;
+    float: bottom;
+    resize: none;
+    font-family: "Microsoft YaHei UI Light", "Microsoft Yahei", "Consolas";
+    font-size: 18px;
+}
+
+.floor_post textarea:focus {
+    border: 1px solid #0096e6;
+    background: white;
+}
+
+.floor_post button {
+    width: 200px;
+    height: 30px;
+    color: #EEEEEE;
+    background: #696969;
+    float: right;
+    bottom: 0;
+    line-height: 30px;
+}
+
+.floor_post button:hover {
+    background: #EEEEEE;
+    color: black;
+    border: 1px solid #0096e6;
+}

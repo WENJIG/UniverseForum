@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/image/favicon.ico">
+    <title th:text="${session.username + '的个人中心'}"></title>
+    <link rel="stylesheet" href="/css/contentTemplate.css">
+    <link rel="stylesheet" href="/css/passport/home.css">
+    <script src="/js/passport/home.js"></script>
+    <script src="/js/SystemMessage.js"></script>
+</head>
+<body>
+<div class="navigation_bar">
+    <ul>
+        <li>
+            <div th:if="${session.isLogin}"></div>
+        </li>
+        <li>
+            <div th:unless="${session.isLogin}" class="a_btn" onclick="window.location='/a/register'">注册</div>
+        </li>
+        <li>
+            <div th:if="${session.isLogin}" class="a_btn" onclick="window.location='/a/logout'">注销</div>
+            <div th:if="${session.isLogin}" class="a_btn" onclick="window.location='/a/home'"
+                 th:text="${session.username}"></div>
+        </li>
+        <li>
+            <div th:unless="${session.isLogin}" class="a_btn" onclick="window.location='/a/login'">登录</div>
+        </li>
+        <li>
+            <div class="a_btn" onclick="window.location='/index'">首页</div>
+        </li>
+    </ul>
+    <div class="a_btn" id="slogan">
+        <span th:if="${session.isLogin}"
+              th:text="${session.userSign+' Level:'+session.userLv+'  🔋 '+session.userExp+'%'}"></span>
+        <span th:unless="${session.isLogin}">LONG MAY THE SUNSHINE Level : 0 🔋 100%</span>
+    </div>
+</div>
+<div class="content">
+    <div class="basic_information">
+        <div class="head_image"
+             th:style="'background: url(/image/headImg/'+${session.userHeadImg}+') ; background-size: 100%;'"></div>
+        <div class="user_msg">
+            <span th:text="${'性别：'+session.userSex}"></span>
+            <span th:text="${'年龄：'+session.userAge}"></span>
+            <span th:text="${'发帖：'+session.postTopic}"></span>
+        </div>
+        <div class="mb2">
+            <button class="btn" onclick="show('head')"><span>我的头像</span><span></span></button>
+        </div>
+        <div class="mb2">
+            <button class="btn" onclick="show('sign')"><span>个性签名</span><span></span></button>
+        </div>
+        <div class="mb2">
+            <button class="btn" onclick="show('sex')"><span>我的性别</span><span></span></button>
+        </div>
+        <div class="mb2">
+            <button class="btn" onclick="show('bbs')"><span>我的版块</span><span></span></button>
+        </div>
+        <div class="mb2">
+            <button class="btn" onclick="show('att')"><span>我的关注</span><span></span></button>
+        </div>
+        <div class="mb2">
+            <button class="btn" onclick="show('fans')"><span>我的粉丝</span><span></span></button>
+        </div>
+        <div class="mb2">
+            <button class="btn" onclick="show('collect')"><span>我的收藏</span><span></span></button>
+        </div>
+        <div class="mb2">
+            <button class="btn" onclick="show('topic')"><span>我的帖子</span><span></span></button>
+        </div>
+        <div class="mb2">
+            <button class="btn" onclick="show('reply')"><span>我的回复</span><span></span></button>
+        </div>
+        <div class="mb2">
+            <button class="btn" onclick="show('privacy')"><span>隐私设置</span><span></span></button>
+        </div>
+        <div class="mb2">
+            <button class="btn" onclick="show('safety')"><span>安全设置</span><span></span></button>
+        </div>
+        <div th:if="${session.username == '席勒'}" class="mb2">
+            <button class="btn" onclick="show('novel')"><span>上传小说</span><span></span></button>
+        </div>
+    </div>
+    <div id="menu">
+        <div id="head" style="display: none">
+            <form enctype="multipart/form-data" method="post" action="/a/home/uploadHeadImg">
+                <input type="file" name="headImgFile"/>
+                <button type="submit">上传</button>
+            </form>
+            <p>支持的图片格式：.jpg .png</p>
+            <p>图片大小不能超过10MB</p>
+            <p>注1：如感觉显示头像宽高不合适，请自行裁剪图片再进行上传。</p>
+            <p>注2：图片显示不正常有可能是浏览器缓存问题，请自行清除。</p>
+        </div>
+        <div id="sign" style="display: none">
+            <form method="post" action="/a/home/sign">
+                <textarea name="sign_text" maxlength="65" th:text="${session.userSign}"></textarea>
+                <br/><br/>
+                <button type="submit">保存</button>&nbsp;&nbsp;&nbsp;&nbsp;签名最多65个字符
+            </form>
+        </div>
+        <div id="sex" style="display: none">
+            <form method="post" action="/a/home/sex">
+                <label for="man" class="radio">
+                    <span class="radio-bg"></span>
+                    <input type="radio" name="sex" id="man" value="男"/> 男
+                    <span class="radio-on"></span>
+                </label>
+                <label for="woman" class="radio">
+                    <span class="radio-bg"></span>
+                    <input type="radio" name="sex" id="woman" value="女"/> 女
+                    <span class="radio-on"></span>
+                </label>
+                <label for="secret" class="radio">
+                    <span class="radio-bg"></span>
+                    <input type="radio" name="sex" id="secret" value="保密" checked="checked"/> 保密
+                    <span class="radio-on"></span>
+                </label>
+                <button type="submit">保存</button>
+            </form>
+        </div>
+        <div id="bbs" style="display: none"></div>
+        <div id="att" style="display: none"></div>
+        <div id="fans" style="display: none"></div>
+        <div id="collect" style="display: none"></div>
+        <div id="topic" style="display: none"></div>
+        <div id="reply" style="display: none"></div>
+        <div id="privacy" style="display: none"></div>
+        <div id="safety" style="display: none"></div>
+        <div id="novel" style="display: none">
+            <p>选择自动发帖的小说</p>
+            <form enctype="multipart/form-data" method="post" action="/manager/auto.post.novel.topic">
+                <input type="file" name="txtFile"/>
+                <button type="submit">上传小说TXT</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script th:inline="javascript" type="text/javascript">
+    var msg = getCookie("warningMsg");
+    if (msg != null) {
+        alert(decodeURIComponent(msg));
+        delCookie("warningMsg");
+    }
+</script>
+</body>
+</html>

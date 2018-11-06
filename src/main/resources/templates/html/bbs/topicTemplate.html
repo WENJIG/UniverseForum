@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${topic.topicTitle}"></title>
+    <link rel="icon" type="image/x-icon" href="/image/favicon.ico">
+    <link rel="stylesheet" href="/css/contentTemplate.css">
+    <link rel="stylesheet" href="/css/topicTemplate.css">
+</head>
+<body>
+<div class="navigation_bar">
+    <ul>
+        <li>
+            <div th:if="${session.isLogin}"></div>
+        </li>
+        <li>
+            <div th:unless="${session.isLogin}" class="a_btn" onclick="window.location='/a/register'">注册</div>
+        </li>
+        <li>
+            <div th:if="${session.isLogin}" class="a_btn" onclick="window.location='/a/logout'">注销</div>
+            <div th:if="${session.isLogin}" class="a_btn" onclick="window.location='/a/home'"
+                 th:text="${session.username}"></div>
+        </li>
+        <li>
+            <div th:unless="${session.isLogin}" class="a_btn" onclick="window.location='/a/login'">登录</div>
+        </li>
+        <li>
+            <div class="a_btn" onclick="window.location='/index'">首页</div>
+        </li>
+    </ul>
+    <div class="a_btn" id="slogan">
+        <span th:if="${session.isLogin}"
+              th:text="${session.userSign+' Level:'+session.userLv+'  🔋 '+session.userExp+'%'}"></span>
+        <span th:unless="${session.isLogin}">LONG MAY THE SUNSHINE Level : 0 🔋 100%</span>
+    </div>
+</div>
+<div class="content">
+    <div class="floor_1base" id="floor1">
+        <div class="floor_info">
+            <p th:text="${'#1 ' + topic.releaseDate + ' 由 ' + topic.postUserName + ' 发布该主题贴' + ' 总回复：' + topic.topicFloorsNum}"></p>
+        </div>
+        <div class="user_head_img"
+             th:style="'background: url(/image/headImg/'+${userHeadImg['__${topic.postUserName}__']}+') ; background-size: 100%;'">
+        </div>
+        <!--
+        <div class="user_base_info">
+            <span th:text="${topic.postUserName}"></span>
+        </div>
+        -->
+        <div class="topic_context_template">
+            <span th:text="${topic.topicContext}"></span>
+        </div>
+    </div>
+    <div class="floors" th:each="floor : ${floorList}">
+        <div class="floor_info" th:id="${'#go' + floor.isfloornum}">
+            <p th:text="${'#' + floor.isfloornum + ' ' + floor.postDate + ' 由 ' + floor.postUsername + ' 回复'}"></p>
+        </div>
+        <div class="user_head_img"
+             th:style="'background: url(/image/headImg/'+${userHeadImg['__${floor.postUsername}__']}+') ; background-size: 100%;'">
+        </div>
+        <!--
+        <div class="user_base_info">
+            <span th:text="${floor.postUsername}"></span>
+        </div>
+        -->
+        <div class="topic_context_template">
+            <span th:text="${floor.floorContext}"></span>
+        </div>
+    </div>
+    <div class="floor_post" id="floordomain">
+        <p>————————————————底线就是拿来被超过的————————————————</p>
+        <form method="post" action="/n/postFloor">
+            <textarea name="text" maxlength="9999" placeholder="请在此输入你的回复" autocomplete="off"></textarea>
+            <input name="t_id" style="display: none" th:value="${topic.topicId}"/>
+            <button type="submit">回复</button>
+        </form>
+    </div>
+    <!--
+    <div class="helpMenu">
+        <div class="post_new_topic">
+            <a href="#floordomain">回帖</a>
+        </div>
+        <div class="reTop">
+            <a href="#floor1">↑</a>
+        </div>
+    </div>
+    -->
+    <script th:inline="javascript" type="text/javascript">
+        var msg = getCookie("warningMsg");
+        if (msg != null) {
+            alert(decodeURIComponent(msg));
+            delCookie("warningMsg");
+        }
+    </script>
+</body>
+</html>
