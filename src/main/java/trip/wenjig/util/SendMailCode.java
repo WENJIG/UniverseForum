@@ -13,10 +13,10 @@ import java.util.Properties;
 @Component
 public class SendMailCode {
 
-    public static final String SEND_EMAIL_ACCOUNT = "q1581900362@163.com";
-    public static final String SEND_EMAIL_PASSWORD = "smtp1138736299";
-    public static final String SEND_EMAIL_SMTP_HOST = "smtp.163.com";
-    public static final String LOCALPATH = "http://192.168.26.127:8080";
+    private static final String SEND_EMAIL_ACCOUNT = "q1581900362@163.com";
+    private static final String SEND_EMAIL_PASSWORD = "smtp1138736299";
+    private static final String SEND_EMAIL_SMTP_HOST = "smtp.163.com";
+    private static final String LOCALPATH = "http://localhost:8080";
 
     public static void sendMail(String email, String userName, String verificationCode) throws Exception {
         Properties props = new Properties();

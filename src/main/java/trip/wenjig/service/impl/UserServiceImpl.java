@@ -87,8 +87,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean updateUserPostTopicNumber(int num, long id) {
-        return userRepository.updateUserPostTopicNumber(num, id) > 0;
+    public boolean updateUserPostTopicNumber(long id) {
+        return userRepository.updateUserPostTopicNumber(id) > 0;
     }
 
     @Override

@@ -12,7 +12,7 @@ public class RegisterCode {
 
     private static final String tempStr = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
-    public static String generateRandomCode() {
+    private static String generateRandomCode() {
         Random random = new Random();
         StringBuffer sb = new StringBuffer();
         for (int i = 0; i < 41; i++) {

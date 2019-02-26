@@ -18,7 +18,7 @@ public class LocalDeleteTempUserThread extends Thread {
     private ArrayList<TempUser> dbAllTempUserList;
     private ArrayList<TempUser> pastDueTempUserList;
 
-    public LocalDeleteTempUserThread() {
+    LocalDeleteTempUserThread() {
         this.userService = (UserService) SpringUtil.getBean(UserService.class);
     }
 
@@ -32,12 +32,12 @@ public class LocalDeleteTempUserThread extends Thread {
                 System.out.println("DELETE_TEMP_USER_定时删除任务:***********************************************************开始检查过期临时用户*****************************************************************");
                 dbAllTempUserList = userService.findAll();
                 if (dbAllTempUserList != null && dbAllTempUserList.size() > 0) {
-                    pastDueTempUserList = new ArrayList<TempUser>();
-                    for (int i = 0; i < dbAllTempUserList.size(); i++) {
-                        String dbTime = dbAllTempUserList.get(i).getLoseEfficacyTime();
+                    pastDueTempUserList = new ArrayList<>();
+                    for (TempUser tempUser : dbAllTempUserList) {
+                        String dbTime = tempUser.getLoseEfficacyTime();
                         String sysTime = SystemDateFormat.getSystemPreciseDate();
                         if (SystemDateFormat.isDateLess(dbTime, sysTime)) {
-                            pastDueTempUserList.add(dbAllTempUserList.get(i));
+                            pastDueTempUserList.add(tempUser);
                         }
                     }
                 }

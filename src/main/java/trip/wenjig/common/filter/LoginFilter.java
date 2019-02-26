@@ -25,9 +25,9 @@ public class LoginFilter implements Filter{
 
         if (req.getHeader("referer") == null) {
             resp.sendRedirect("/a/login");
-        }else {
-            filterChain.doFilter(servletRequest,servletResponse);
+            return;
         }
+        filterChain.doFilter(servletRequest,servletResponse);
     }
 
     @Override

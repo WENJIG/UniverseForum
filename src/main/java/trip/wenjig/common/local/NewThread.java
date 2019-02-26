@@ -1,5 +1,8 @@
 package trip.wenjig.common.local;
 
+/**
+ * 单例对象
+ */
 public enum NewThread {
 
     DELETE_TEMP_USER, SEND_MAIL, NOVEL_AUTO_POST;

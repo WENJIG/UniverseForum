@@ -55,19 +55,16 @@ public class SystemDateFormat {
      */
     public static boolean isDateLess(String date, String modelDate) {
         SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        Date dateFront = null;
-        Date dateAfter = null;
+        Date dateFront;
+        Date dateAfter;
         try {
             dateFront = dateFormat.parse(date);
             dateAfter = dateFormat.parse(modelDate);
         } catch (Exception exception) {
             exception.printStackTrace();
-        }
-        if (dateFront.getTime() < dateAfter.getTime()) {
-            return true;
-        } else {
             return false;
         }
+        return dateFront.getTime() < dateAfter.getTime();
     }
 
     /**

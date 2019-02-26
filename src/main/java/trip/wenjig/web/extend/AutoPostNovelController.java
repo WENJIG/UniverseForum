@@ -11,6 +11,7 @@ import trip.wenjig.util.SystemDateFormat;
 import trip.wenjig.web.BaseController;
 
 import java.io.File;
+import java.util.Objects;
 
 @Controller
 public class AutoPostNovelController extends BaseController {
@@ -25,7 +26,7 @@ public class AutoPostNovelController extends BaseController {
             if (file.getSize() > 100000000) {
                 return "html/hint/extend/autoPostNovelLoser.html";
             }
-            String suffixName = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+            String suffixName = file.getOriginalFilename().substring(Objects.requireNonNull(file.getOriginalFilename()).lastIndexOf("."));
             if (!(suffixName.equals(".txt"))) {
                 return "html/hint/extend/autoPostNovelLoser.html";
             }

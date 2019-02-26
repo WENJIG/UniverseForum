@@ -22,12 +22,16 @@ import java.util.HashMap;
 @Controller
 public class BbsController extends BaseController {
 
+    private final BbsService bbsService;
+    private final TopicService topicService;
+    private final UserService userService;
+
     @Autowired
-    private BbsService bbsService;
-    @Autowired
-    private TopicService topicService;
-    @Autowired
-    private UserService userService;
+    public BbsController(BbsService bbsService, TopicService topicService, UserService userService) {
+        this.bbsService = bbsService;
+        this.topicService = topicService;
+        this.userService = userService;
+    }
 
     @RequestMapping( value = "/s/bbs" ,method = RequestMethod.GET)
     public String searchBbs(@RequestParam("s_bbs")String searchText, Model model) {
@@ -40,20 +44,7 @@ public class BbsController extends BaseController {
 
         Bbs bbs = bbsService.findByBbsName(searchText);
         if (bbs != null) {
-            Bbs bbsJson = JSON.parseObject(bbs.toString(), Bbs.class);
-            model.addAttribute("bbsJson", bbsJson);
-
-            ArrayList<Topic> bbsDbList = topicService.findTopicOrderReleaseDate(bbs.getBbsId());
-            model.addAttribute("topicList", JSONArray.parseArray(JSON.toJSONString(bbsDbList)));
-
-            ArrayList<String> userNameList = new ArrayList<>();
-            for (int i = 0; i < bbsDbList.size(); i++) {
-                userNameList.add(bbsDbList.get(i).getPostUserName());
-            }
-            HashMap<String,String> userHeadImgMap = userService.findByUserFaceImagePathMap(userNameList);
-            model.addAttribute("userHeadImg",userHeadImgMap);
-
-            return "html/bbs/bbsTemplate.html";
+            return getRet(model, bbs);
         } else {
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //    新建版块并默认发帖
@@ -81,21 +72,25 @@ public class BbsController extends BaseController {
             // END
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-            Bbs bbsJson = JSON.parseObject(nowBbs.toString(), Bbs.class);
-            model.addAttribute("bbsJson", bbsJson);
-
-            ArrayList<Topic> bbsDbList = topicService.findTopicOrderReleaseDate(nowBbs.getBbsId());
-            model.addAttribute("topicList",JSONArray.parseArray(JSON.toJSONString(bbsDbList)));
-
-            ArrayList<String> userNameList = new ArrayList<>();
-            for (int i = 0; i < bbsDbList.size(); i++) {
-                userNameList.add(bbsDbList.get(i).getPostUserName());
-            }
-            HashMap<String,String> userHeadImgMap = userService.findByUserFaceImagePathMap(userNameList);
-            model.addAttribute("userHeadImg",userHeadImgMap);
-
-            return "html/bbs/bbsTemplate.html";
+            return getRet(model, nowBbs);
         }
+    }
+
+    private String getRet(Model model, Bbs bbs) {
+        Bbs bbsJson = JSON.parseObject(bbs.toString(), Bbs.class);
+        model.addAttribute("bbsJson", bbsJson);
+
+        ArrayList<Topic> bbsDbList = topicService.findTopicOrderReleaseDate(bbs.getBbsId());
+        model.addAttribute("topicList", JSONArray.parseArray(JSON.toJSONString(bbsDbList)));
+
+        ArrayList<String> userNameList = new ArrayList<>();
+        for (int i = 0; i < bbsDbList.size(); i++) {
+            userNameList.add(bbsDbList.get(i).getPostUserName());
+        }
+        HashMap<String,String> userHeadImgMap = userService.findByUserFaceImagePathMap(userNameList);
+        model.addAttribute("userHeadImg",userHeadImgMap);
+
+        return "html/bbs/bbsTemplate.html";
     }
 
 }

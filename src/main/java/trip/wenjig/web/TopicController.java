@@ -17,23 +17,27 @@ import java.util.HashMap;
 @Controller
 public class TopicController extends BaseController {
 
+    private final TopicService topicService;
+    private final BbsService bbsService;
+    private final UserService userService;
+    private final FloorService floorService;
+    private final ReplyService replyService;
+
     @Autowired
-    private TopicService topicService;
-    @Autowired
-    private BbsService bbsService;
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private FloorService floorService;
-    @Autowired
-    private ReplyService replyService;
+    public TopicController(TopicService topicService, BbsService bbsService, UserService userService, FloorService floorService, ReplyService replyService) {
+        this.topicService = topicService;
+        this.bbsService = bbsService;
+        this.userService = userService;
+        this.floorService = floorService;
+        this.replyService = replyService;
+    }
 
     @RequestMapping("/n/postTopic")
     public String postNewTopic(@RequestParam("tit") String titleText, @RequestParam("text") String conText, @RequestParam("bbsName") String bbsName) throws UnsupportedEncodingException {
-        if (titleText.length() > 50 || conText.length() > 9999 || conText.trim().equals("") || conText == null) {
+        if (titleText.length() > 50 || conText.length() > 9999 || conText.trim().equals("")) {
             return "redirect:/s/bbs?s_bbs=" + java.net.URLEncoder.encode(bbsName, "UTF-8");
         }
-        if (getSession().getAttribute("isLogin") == null || (boolean) getSession().getAttribute("isLogin") == false) {
+        if (getSession().getAttribute("isLogin") == null || !((boolean) getSession().getAttribute("isLogin"))) {
             setCookie("warningMsg", "未登录不能发帖！");
             return "redirect:/a/login";
         } else {
@@ -42,7 +46,7 @@ public class TopicController extends BaseController {
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //更新用户发帖次数之类的信息,更新版块发帖次数之类的信息
             User postUser = userService.findByUserId((long) getSession().getAttribute("userId"));
-            userService.updateUserPostTopicNumber(postUser.getTopicNumber() + 1, postUser.getUserId());
+            userService.updateUserPostTopicNumber(postUser.getUserId());
             bbsService.updateBbsTopicNumber(bbs.getBbsId());
             //END
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -61,11 +65,11 @@ public class TopicController extends BaseController {
 
     @RequestMapping("/n/postFloor")
     public String postFloor(@RequestParam("t_id") long topicId, @RequestParam("text") String text) {
-        if (text.length() > 9999 || text == null || text.trim().equals("")) {
+        if (text.length() > 9999 || text.trim().equals("")) {
             //setCookie("warningMsg", " 回复失败！");
             return "redirect:/p/" + topicId;
         }
-        if (getSession().getAttribute("isLogin") == null || (boolean) getSession().getAttribute("isLogin") == false) {
+        if (getSession().getAttribute("isLogin") == null || !((boolean) getSession().getAttribute("isLogin"))) {
             setCookie("warningMsg", "未登录不能发帖！");
             return "redirect:/a/login";
         }
@@ -87,7 +91,7 @@ public class TopicController extends BaseController {
 
     @RequestMapping(value = "/p/{lookTopicId}", method = RequestMethod.GET)
     public String lookTopic(@PathVariable String lookTopicId, Model model) {
-        Long id = Long.valueOf(lookTopicId).longValue();
+        Long id = Long.valueOf(lookTopicId);
         Topic topic = topicService.findById(id);
         if (topic == null) {
             return "redirect:/hint/notFoundTopic";

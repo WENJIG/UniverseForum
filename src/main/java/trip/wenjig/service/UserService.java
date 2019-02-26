@@ -26,7 +26,7 @@ public interface UserService {
 
     boolean updateUserSex(int sex, long id);
 
-    boolean updateUserPostTopicNumber(int num, long id);
+    boolean updateUserPostTopicNumber(long id);
 
     void deleteTempUser(TempUser tempUser);
 

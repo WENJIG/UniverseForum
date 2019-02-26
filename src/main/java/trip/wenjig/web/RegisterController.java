@@ -13,8 +13,12 @@ import trip.wenjig.util.*;
 @Controller
 public class RegisterController extends BaseController {
 
+    private final UserService userService;
+
     @Autowired
-    private UserService userService;
+    public RegisterController(UserService userService) {
+        this.userService = userService;
+    }
 
     @RequestMapping("/a/registering")
     public String registering(@RequestParam(name = "username", required = false, defaultValue = "") String username,
@@ -107,7 +111,7 @@ public class RegisterController extends BaseController {
             tempUser.setPassword(password);
             tempUser.setMail(mail);
             tempUser.setVerificationCode(verificationCode);
-            tempUser.setLoseEfficacyTime(new SystemDateFormat().getSystemPreciseDate5m());
+            tempUser.setLoseEfficacyTime(SystemDateFormat.getSystemPreciseDate5m());
             userService.addTempUser(tempUser);
         } catch (Exception e) {
             e.printStackTrace();

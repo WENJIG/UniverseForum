@@ -10,7 +10,7 @@ import java.util.ArrayList;
 @Repository
 public interface FloorRepository extends JpaRepository<Floor, Long> {
 
-    @Query("select f from Floor f where f.istopicId = ?1 order by f.isfloornum asc")
+    @Query(nativeQuery = true, value = "select * from un_floor where istopic_id = ?1 order by isfloornum asc")
     ArrayList<Floor> findIsTopicAllFloorList(long isTopicId);
 
 }

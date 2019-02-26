@@ -11,11 +11,7 @@ public class RegisterCheck {
      * @Return boolean
      */
     public static boolean isNormativeString(String str) {
-        if (str.matches("^[a-zA-Z0-9\u4E00-\u9FA5]+$")) {
-            return true;
-        } else {
-            return false;
-        }
+        return str.matches("^[a-zA-Z0-9\u4E00-\u9FA5]+$");
     }
 
     /**
@@ -24,11 +20,7 @@ public class RegisterCheck {
      * @Return boolean
      */
     public static boolean isNormativeStringNumber(String str) {
-        if (str.length() >= 4 && str.length() <= 20) {
-            return true;
-        } else {
-            return false;
-        }
+        return str.length() >= 4 && str.length() <= 20;
     }
 
     /**
@@ -37,12 +29,8 @@ public class RegisterCheck {
      * @Return boolean
      */
     public static boolean isNormativeEmail(String email) {
-        if (email.matches("^[a-z0-9A-Z]+[- | a-z0-9A-Z . _]+@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$")
-                && email.length() < 90) {
-            return true;
-        } else {
-            return false;
-        }
+        return email.matches("^[a-z0-9A-Z]+[- | a-z0-9A-Z . _]+@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$")
+                && email.length() < 90;
     }
 
 }

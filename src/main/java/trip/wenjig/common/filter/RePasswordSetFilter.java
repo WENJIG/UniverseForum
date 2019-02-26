@@ -21,9 +21,9 @@ public class RePasswordSetFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         HttpServletResponse resp = (HttpServletResponse) servletResponse;
 
-        if (req.getSession().getAttribute("vCode") != null && (long)req.getSession().getAttribute("updateUserId") != 0L) {
+        if (req.getSession().getAttribute("vCode") != null && (long) req.getSession().getAttribute("updateUserId") != 0L) {
             filterChain.doFilter(servletRequest,servletResponse);
-        }else {
+        } else {
             resp.sendRedirect("/index");
         }
     }

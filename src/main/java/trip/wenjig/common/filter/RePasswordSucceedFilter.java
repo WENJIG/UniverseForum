@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Order(1)
-@WebFilter(filterName = "rePasswordSetFilter", urlPatterns = "/a/rePassword.succeed")
+@WebFilter(filterName = "rePasswordSucceedFilter", urlPatterns = "/a/rePassword.succeed")
 public class RePasswordSucceedFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -21,8 +21,8 @@ public class RePasswordSucceedFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         HttpServletResponse resp = (HttpServletResponse) servletResponse;
 
-        if (req.getSession().getAttribute("vCode") != null && (long)req.getSession().getAttribute("updateUserId") != 0L) {
-            filterChain.doFilter(servletRequest, servletResponse);
+        if (req.getSession().getAttribute("vCode") != null && (long) req.getSession().getAttribute("updateUserId") != 0L) {
+            filterChain.doFilter(servletRequest,servletResponse);
         } else {
             resp.sendRedirect("/index");
         }

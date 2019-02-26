@@ -56,7 +56,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Modifying
     @Transactional
-    @Query(value = "update User u set u.topicNumber=?1 where u.userId=?2")
-    int updateUserPostTopicNumber(int num, long id);
+    @Query(value = "update User u set u.topicNumber=u.topicNumber+1 where u.userId=?1")
+    int updateUserPostTopicNumber(long id);
 
 }

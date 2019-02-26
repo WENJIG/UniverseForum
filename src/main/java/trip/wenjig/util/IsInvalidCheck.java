@@ -36,8 +36,8 @@ public class IsInvalidCheck {
      */
     private static boolean containBlank(String str) {
         char[] c = str.toCharArray();
-        for (int i = 0; i < c.length; i++) {
-            if (c[i] == (char) 32) {
+        for (char aC : c) {
+            if (aC == (char) 32) {
                 return true;
             }
         }
@@ -50,7 +50,7 @@ public class IsInvalidCheck {
      * @Return boolean
      */
     public static boolean isNumber(String str) {
-        return new String(str).matches("^\\d+$");
+        return str.matches("^\\d+$");
     }
 
 }

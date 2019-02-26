@@ -20,8 +20,12 @@ import java.text.ParseException;
 @Controller
 public class LoginController extends BaseController {
 
+    private final UserService userService;
+
     @Autowired
-    private UserService userService;
+    public LoginController(UserService userService) {
+        this.userService = userService;
+    }
 
     @RequestMapping("/a/rePassword")
     public String rePassword() {
@@ -40,7 +44,7 @@ public class LoginController extends BaseController {
 
     @RequestMapping("/a/login.ing")
     public String logging(@RequestParam("username") String userName, @RequestParam("password") String password) {
-        User loginUser = null;
+        User loginUser;
         if (!(IsInvalidCheck.allCheck(userName.trim()) && IsInvalidCheck.allCheck(password.trim()))) {
             loginUser = userService.findByLogin(userName, password);
         } else {
@@ -63,7 +67,7 @@ public class LoginController extends BaseController {
 
     @RequestMapping("/a/rePassword.ing")
     public String rePasswordIng(@RequestParam("username") String userName, @RequestParam("email") String email) {
-        User rePwdUser = null;
+        User rePwdUser;
         if (!(IsInvalidCheck.allCheck(userName.trim()) && IsInvalidCheck.allCheck(email.trim()))) {
             rePwdUser = userService.findByUserNameAndUserEmail(userName, email);
         } else {
@@ -156,7 +160,7 @@ public class LoginController extends BaseController {
         }
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         String age;
-        long day = 0L;
+        long day = 0;
         try {
             day = SystemDateFormat.daySub(loginUser.getJoinDate(), SystemDateFormat.getSystemDate());
         } catch (ParseException e) {

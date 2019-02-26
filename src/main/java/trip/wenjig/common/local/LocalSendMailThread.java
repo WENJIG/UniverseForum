@@ -10,7 +10,7 @@ public class LocalSendMailThread extends Thread {
 
     private ScheduledExecutorService scheduledThreadPool;
 
-    public LocalSendMailThread() {
+    LocalSendMailThread() {
     }
 
     @Override

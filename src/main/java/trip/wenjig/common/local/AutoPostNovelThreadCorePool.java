@@ -10,6 +10,7 @@ import trip.wenjig.util.NovelUtil;
 import trip.wenjig.util.SystemDateFormat;
 
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -22,7 +23,7 @@ public class AutoPostNovelThreadCorePool extends Thread {
 
     private ScheduledExecutorService scheduledThreadPool;
 
-    public AutoPostNovelThreadCorePool() {
+    AutoPostNovelThreadCorePool() {
         this.bbsService = (BbsService) SpringUtil.getBean(BbsService.class);
         this.topicService = (TopicService) SpringUtil.getBean(TopicService.class);
         this.floorService = (FloorService) SpringUtil.getBean(FloorService.class);
@@ -52,11 +53,11 @@ public class AutoPostNovelThreadCorePool extends Thread {
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////
             try {
                 StringBuffer context = new StringBuffer("前言\n");
-                String tempText = null;
+                String tempText;
                 String templateText = "%s\n";
 
                 // 1楼的简介
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(tempFile), "UTF-8"));
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(tempFile), StandardCharsets.UTF_8));
                 while ((tempText = bufferedReader.readLine()) != null) {
                     if (NovelUtil.checkNovelChapter(tempText,0)) {
                         context.append("\n");
@@ -73,25 +74,19 @@ public class AutoPostNovelThreadCorePool extends Thread {
 
 
                 // 章节
-                Floor chapter = new Floor();
+                Floor chapter;
                 int floorNum = 1;
                 boolean lock = true;
                 final Topic isTopic = topicService.findOneMyIdea(baseFileName, postDate, defPostUser);
                 if (isTopic == null) {
-                    throw new Exception("楼层依赖错误,修正此错误需要更改数据库结构,触发几率微小");
+                    throw new Exception("楼层依赖错误");
                 }
 
                 while ((tempText = bufferedReader.readLine()) != null) {
                     if (NovelUtil.checkNovelChapter(tempText)) {
                         chapter = new Floor();
-                        chapter.setFloorContext(context.toString());
-                        chapter.setIsfloornum(++floorNum);
-                        chapter.setIstopicId(isTopic.getTopicId());
-                        chapter.setPostDate(SystemDateFormat.getSystemPreciseDate());
-                        chapter.setPostUsername(defPostUser);
-                        chapter.setRepliesnum(0);
-                        floorService.addFloor(chapter);
-                        topicService.updateTopicFloorNumber(isTopic.getTopicId());
+                        assert context != null;
+                        getFloor(defPostUser, context, chapter, floorNum, isTopic);
 
                         context = new StringBuffer();
                     }
@@ -103,24 +98,29 @@ public class AutoPostNovelThreadCorePool extends Thread {
                 }
                 // 大结局以及后记的内容
                 chapter = new Floor();
-                chapter.setFloorContext(context.toString());
-                chapter.setIsfloornum(++floorNum);
-                chapter.setIstopicId(isTopic.getTopicId());
-                chapter.setPostDate(SystemDateFormat.getSystemPreciseDate());
-                chapter.setPostUsername(defPostUser);
-                chapter.setRepliesnum(0);
-                floorService.addFloor(chapter);
-                topicService.updateTopicFloorNumber(isTopic.getTopicId());
+                assert context != null;
+                getFloor(defPostUser, context, chapter, floorNum, isTopic);
 
                 bufferedReader.close();
 
+                //noinspection ResultOfMethodCallIgnored
                 tempFile.delete();
-            } catch (IOException e) {
-                e.printStackTrace();
             } catch (Exception e) {
                 e.printStackTrace();
             }
         },0, TimeUnit.MINUTES);
+    }
+
+    private void getFloor(String defPostUser, StringBuffer context, Floor chapter, int floorNum, Topic isTopic) {
+        chapter.setFloorContext(context.toString());
+        chapter.setIsfloornum(++floorNum);
+        chapter.setIstopicId(isTopic.getTopicId());
+        chapter.setPostDate(SystemDateFormat.getSystemPreciseDate());
+        chapter.setPostUsername(defPostUser);
+        chapter.setRepliesnum(0);
+        floorService.addFloor(chapter);
+        topicService.updateTopicFloorNumber(isTopic.getTopicId());
+        //return floorNum;
     }
 
     @Override

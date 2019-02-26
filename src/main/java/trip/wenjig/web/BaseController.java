@@ -24,11 +24,22 @@ public class BaseController {
         return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getResponse();
     }
 
-    protected void setCookie(String name, String value) {
+    void setCookie(String name, String value) {
         try {
             String utf8Value = URLEncoder.encode(value,"utf-8");
             Cookie cookie = new Cookie(name, utf8Value);
             cookie.setPath("/");
+            getResponse().addCookie(cookie);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+    }
+
+    protected void setCookie(String name, String value, String path) {
+        try {
+            String utf8Value = URLEncoder.encode(value,"utf-8");
+            Cookie cookie = new Cookie(name, utf8Value);
+            cookie.setPath(path);
             getResponse().addCookie(cookie);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
